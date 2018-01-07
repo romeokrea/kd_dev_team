@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css"/>
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css"/>
+        <title>Kreadouane</title>
+
+    </h:head>
+
+
+    <h:body>
+        <f:view locale="#{sessionController.language}">
+
+
+            <div id="top">
+                <h:form>
+                    <span style="padding-left: 50px; font-size: 25pt; font-weight: 200; font-style: italic; font-family: Georgia, Times New Roman, Times, serif;"><b>Krea</b></span>
+                    <span style="font-size: 19px; font-weight: 100; font-family: Georgia, Times New Roman, Times, serif;">Douane</span>
+                    
+                    <span style="float: right; ">
+                    
+                    <h:form> 
+                        
+                        <p:growl id="messages" showDetail="true"/>
+                        
+
+                    </h:form>
+                       
+                </span>
+                    
+                    <span style="float: right; padding-top: 10px; padding-left: 6px;">
+                        <p:commandButton oncomplete="PF('wv_logout').show()"    styleClass="logout" value="" style="background-color: white; border: none;"/>
+                    </span>
+                    <span style="float: right; padding-top: 18px; padding-left: 8px;">
+                        <p:commandButton immediate="true" action="#{sessionController.french()}" styleClass="french" value="" style="background-color: white; border: none;"/>
+                    </span> 
+                    <span style="float: right; padding-top: 18px; padding-left: 12px;">
+                        <p:commandButton immediate="true" action="#{sessionController.english()}" styleClass="english" value=""  style="background-color: white; border: none;"/>
+                    </span>
+                     <span style="float: right; padding-left: 2px;"><a href="welcom.xhtml">
+                        <h2>Home</h2></a>
+                    </span>
+                    
+                    
+
+                </h:form>
+                 
+            </div>
+            <div id="bottombar">
+            </div>
+            <div style="background-image: url(resources/image/h.jpg); height: 573px;">
+                <div id="left">
+                    <h:form>
+                    <p:menu style="width: 150%; background-color: transparent; height: 530px;">
+                        <p:submenu  label="#{lm.GestionUtilisateur}" class="submenu">
+                                <p:menuitem immediate="true" action="userStatistics.xhtml?faces-redirect=true" value="Dashboard" style="color: #002100" />
+                                <p:menuitem immediate="true" action="utilisateur.xhtml?faces-redirect=true" value="#{lm.User}" style="color: #002100" />
+                               <p:menuitem immediate="true" action="cotation.xhtml?faces-redirect=true" value="Cotation" style="color: #002100" />
+                               
+                        </p:submenu>
+                        <p:submenu  label="Options douane" class="submenu">
+                                <p:menuitem immediate="true" action="article.xhtml?faces-redirect=true" value="Articles" style="color: #002100" />
+                                <p:menuitem immediate="true" action="codeadditionnels.xhtml?faces-redirect=true" value="Codes additionnnels" style="color: #002100" />
+                                <p:menuitem immediate="true" action="modelledeclaration.xhtml?faces-redirect=true" value="Modeles declaration" style="color: #002100" />
+                                <p:menuitem immediate="true" action="regimedouanier.xhtml?faces-redirect=true" value="Regimes douaniers" style="color: #002100" />
+                               
+                        </p:submenu>
+                        <p:submenu  label="Prestataires" class="submenu">
+                        <p:menuitem immediate="true" action="cad.xhtml?faces-redirect=true" value="CAD" style="color: #002100" />
+                                <p:menuitem immediate="true" action="transporteur.xhtml?faces-redirect=true" value="Transporteur" style="color: #002100" />
+                                <p:menuitem immediate="true" action="acconier.xhtml?faces-redirect=true" value="Acconier" style="color: #002100" />
+                                <p:menuitem immediate="true" action="banque.xhtml?faces-redirect=true" value="Banque" style="color: #002100" />
+                                <p:menuitem immediate="true" action="assureur.xhtml?faces-redirect=true" value="Assureur" style="color: #002100" />
+                        </p:submenu>
+                            <p:submenu label="Parametres" class="submenu" >
+                                <p:menuitem immediate="true" action="paramlogiciel.xhtml?faces-redirect=true" value="parametre logiciel" style="color: #002100" />
+                                <p:menuitem immediate="true" action="paramsociete.xhtml?faces-redirect=true" value="parametre societe" style="color: #002100" />
+                                <p:menuitem immediate="true" action="Paramcalcul.xhtml?faces-redirect=true" value="parametre de calcul" style="color: #002100" />
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </div>
+                <div class="left_content">
+
+                    <ui:insert name="content">
+                        
+                        
+
+
+                    </ui:insert>
+                </div>
+            </div>
+            <div id="bottom">
+                <center>
+                    <h:outputText value="&copy;Copyright KreaDouane 2017" style="font-size: 12pt; font-weight: bold; font-style: italic;" />                 
+                </center>
+            </div>
+            <h:form>
+                <p:dialog id="fm_forest" modal="true" showEffect="fold" widgetVar="wv_logout">
+
+                    <f:facet name="header">
+                        <h:outputText value="Choose an option" style="padding-left: 70px;"/>
+                    </f:facet>
+                    <h:panelGrid>
+                        <h:outputText value=" Logout option, Do you really want to log out? "/>
+                    </h:panelGrid>
+                    <center>
+                        <div style="float: left; padding-left: 35px; padding-top: 10px;">
+                            <p:commandButton immediate="true" action="#{sessionController.logOut()}" icon="plus" value="Yes" style=" background-color: #6d9f6c; border-radius:20px; padding-left: 15px; padding-right: 15px;"/>
+                        </div>
+                        <div style="float: right; padding-right: 35px; padding-top: 10px;">
+                            <p:commandButton oncomplete="PF('wv_logout').hide()" icon="cross" value="Cancel" style=" background-color: #6d9f6c; border-radius:20px;"/>
+                        </div>
+
+                    </center>
+                </p:dialog>
+            </h:form>
+        </f:view>
+    </h:body>
+
+</html>

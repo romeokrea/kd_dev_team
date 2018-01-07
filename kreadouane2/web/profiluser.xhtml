@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                        template="./template.xhtml">
+
+            <ui:define name="container">
+                <section class="content" id="fm_user" modal="true" showEffect="fold" widgetVar="wv_user">
+                    
+                    <div><h4 style=" margin-top: 1px; margin-bottom: 15px;">Profil utilisateur</h4></div>
+                    <!--<div class="container-fluid">-->
+                    <f:view locale="#{sessionController.language}">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    
+                                    <div class="body">
+                                         <h:form id="form_validation">
+
+                                            <div class="row clearfix">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Login:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{paramcalculController.operation.equals('delete')}" id="phytosanitaire" value="#{sessionController.currentUser.login}" title="valeur" required="true" requiredMessage="Obligatory field!"/>
+                             
+                                                    </div>
+                                                    <br/>  
+
+
+                                                   <label class="form-label">Function:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{paramcalculController.operation.equals('delete')}" required="true" requiredMessage="Obligatory field!" id="timbrebl" value="#{sessionController.currentUser.function}" title="valeur" />
+                                    
+                                                    </div>
+                                                    <br/>
+                                                    </div >
+                                                    <div class="col-md-6">
+                                                    <label class="form-label">Password:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{paramcalculController.operation.equals('delete')}" id="fraisouverturedossier" value="#{sessionController.currentUser.password}" title="valeur" required="true" requiredMessage="Obligatory field!" />
+                                               
+                                                    </div>
+                                                    <br/>
+                                                    <label class="form-label">Status:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{paramcalculController.operation.equals('delete')}" id="travailextralegal" value="#{sessionController.currentUser.status}" title="valeur" required="true" requiredMessage="Obligatory field!" />
+                                               
+                                                    </div>
+                                                    <br/>
+                                                    </div>
+                                                   
+                                                </div>
+                                                
+                                                    
+
+                                                
+                                          
+
+                                        
+                                            <center>
+                                            <!--p:commandButton class="btn waves-effect" style="background-color: #26a69a; color: white;" type="submit" action="#{paramcalculController.modifyParamcalcul()}" value="#{lm.Save}"/-->
+                    </center>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </f:view>
+                    <!--</div>-->
+                </section>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

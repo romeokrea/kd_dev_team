@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                        template="./template.xhtml">
+
+            <ui:define name="container">
+                <section class="content" id="fm_user" modal="true" showEffect="fold" widgetVar="wv_user">
+                    <div><h4 style=" margin-top: 1px; margin-bottom: 15px;">Details acconier</h4></div>
+                    <!--<div class="container-fluid">-->
+                    <f:view locale="#{sessionController.language}">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+
+                                    <div class="body">
+                                        <h:form id="form_validation">
+
+                                            <div class="row clearfix">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Name of company</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{acconierController.operation.equals('delete')}" id="namecompany" value="#{acconierController.acconier.namecompany}" required="true" requiredMessage="Obligatory field!"/>
+
+                                                    </div>
+                                                    <br/>  
+
+
+                                                    <label class="form-label">adress of company</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{acconierController.operation.equals('delete')}" id="adressecompany" value="#{acconierController.acconier.adressecompany}" required="true" requiredMessage="Obligatory field!" />
+
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">taxe payer number</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{acconierController.operation.equals('delete')}" id="phonecontribuable" value="#{acconierController.acconier.phonecontribuable}" required="true" requiredMessage="Obligatory field!"/>
+
+                                                    </div>
+                                                    <br/>  
+
+
+                                                    <label class="form-label">email of company</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{acconierController.operation.equals('delete')}" id="emailcompany" value="#{acconierController.acconier.emailcompany}" required="true" requiredMessage="Obligatory field!" />
+
+                                                    </div>
+                                                    <br/>
+
+                                                </div>
+                                            </div>
+
+
+                                            <!--                                <div class="form-group form-float">
+                                                                                <div class="form-line">
+                                                                                    <input type="text" class="form-control" name="name" />
+                                                                                    <label class="form-label">Name</label>
+                                                                                </div>
+                                                                            </div>-->
+                                            <!--                                <div class="form-group form-float">
+                                                                                <div class="form-line">
+                                                                                    <input type="text" class="form-control" name="surname" />
+                                                                                    <label class="form-label">Surname</label>
+                                                                                </div>
+                                                                            </div>-->
+                                            <!--                                            <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <input type="email" class="form-control" name="email" />
+                                                                                                <label class="form-label">Email</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <input type="radio" name="gender" id="male" class="with-gap"/>
+                                                                                            <label for="male">Male</label>
+                                            
+                                                                                            <input type="radio" name="gender" id="female" class="with-gap"/>
+                                                                                            <label for="female" class="m-l-20">Female</label>
+                                                                                        </div>
+                                                                                        <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <textarea name="description" cols="30" rows="5" class="form-control no-resize" ></textarea>
+                                                                                                <label class="form-label">Description</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <input type="password" class="form-control" name="password" />
+                                                                                                <label class="form-label">Password</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <input type="checkbox" id="checkbox" name="checkbox"/>
+                                                                                            <label for="checkbox">I have read and accept the terms</label>
+                                                                                        </div>-->
+                                            <!--                                            <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>-->
+
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    <div class="body">
+                                        <h:form id="form">
+                                            <p:growl id="msg" showDetail="true" life="2000" /> 
+
+
+                                            <p:commandButton icon="ui-icon-plus" class="waves-effect" value="add" action="#{contactsController.create2()}" style=" background-color: #1f897f; margin-bottom: 5px; color: white;"/>
+
+                                            <b style="margin-left: 760px;">Exporter en:</b>
+                                            <h:commandLink style="margin-bottom: 10px; margin-left: 20px;">
+
+                                                <img src="resources/image/Excel-icon-smaller.png" alt=""/>
+                                                <p:dataExporter type="xls" target="table" fileName="acconier" postProcessor="#{print.postProcessXLS}" />
+                                            </h:commandLink>    
+                                            <h:commandLink style="margin-bottom: 10px;">
+                                                <img src="resources/image/Oficina-PDF-icon-smaller.png" alt=""/>
+                                                <p:dataExporter type="pdf" target="table" fileName="acconier" preProcessor="#{print.preProcessPDF}" />
+                                            </h:commandLink>
+
+                                            <p:dataTable selectionMode="single" selection="#{contactsController.contact}" rowKey="#{item.id}" id="table" class="borderless" scrollable="true"  reflow="true" value="#{contactsController.listContacts}" var="item"  >
+ 
+
+                                                <p:column style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Name" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.name}"/>
+                                                </p:column>
+
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Surname" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.surname}"/>
+                                                </p:column>
+                                                <p:column style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Phone" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.phone}"/>
+                                                </p:column>
+                                                <p:column style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Email" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.email}"/>
+                                                </p:column>
+                                                <p:column style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Fonction" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.fonction}"/>
+                                                </p:column>
+                                                <p:column filterBy="" style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="option" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+
+
+                                                    <center>
+                                                        <p:commandButton icon="ui-icon-pencil" action="#{contactsController.modif5()}" style=" background-color: #1f897f;"/>
+                                                        <p:commandButton icon="ui-icon-trash" action="#{contactsController.deleteContactAcc}" update="form:table" style=" background-color: #E60415;"/>
+
+
+
+
+                                                    </center>
+                                                </p:column>
+                                            </p:dataTable>
+
+
+
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </f:view>
+                    <!--</div>-->
+                </section>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

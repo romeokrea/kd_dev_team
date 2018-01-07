@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <body>
+
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="container">
+                <head>
+                    <link rel="stylesheet" href="css/myprintstyle.css" media="print" />
+                </head>
+
+
+                <section class="content">
+
+
+                    <f:view locale="#{sessionController.language}">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+
+                                    <div class="body">
+
+                                        <h:form>
+                                            <div id="div3">
+                                                <div class="header">
+                                                    <center>
+                                                    <p:outputLabel style="font-size: 20px; margin-right: 15px;" value="TERM LOGISTIQUE" />
+                                                    <p:outputLabel style="font-size: 20px; margin-right: 15px;" value="DOUALA AKWA" />
+                                                    <p:outputLabel style="font-size: 20px; margin-right: 15px;" value="termlogistique@gmail.com" />
+
+                                                    </center>
+                                                </div>
+                                                <br/>
+                                                <div class="row clearfix">
+                                                    <div class="col-md-6">
+
+                                                        <label class="form-label">Total</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; background-color: #ffff99; margin-bottom: 10px;" id="total" value="#{cotationController.cotation.montemp}" />  
+                                                        </div>
+
+                                                        <label class="form-label">Position</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="position" value="#{cotationController.cotation.artId.code}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Libelle</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="libelle" value="#{cotationController.cotation.artId.description}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Type de conteneur</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%;  margin-bottom: 10px;" id="typedeconteneur" value="#{cotationController.cotation.conteneur}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Valeur imposable (VI)</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%;  margin-bottom: 10px;" id="Valeurimposable" value="#{cotationController.cotation.valeurimposable}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Droit de douane (DDI)</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="Droitdouane" value="#{cotationController.cotation.droitdedouane}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Droit d'accise (DA)</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="droitaccise" value="#{cotationController.cotation.droitdaccise}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">TVA + CAC</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="tva" value="#{cotationController.cotation.tvacac}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Precompte sur achat (PRC)</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="precompteachat" value="#{cotationController.cotation.precomptesurachat}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">CCI</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="cci" value="#{cotationController.cotation.cci}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">TCI</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="tci" value="#{cotationController.cotation.tci}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">TO</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="to" value="#{cotationController.cotation.t0}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">CIA</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="cia" value="#{cotationController.cotation.cia}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">RI</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="ri" value="#{cotationController.cotation.ri}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Taxe SGS</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="taxesgs" value="#{cotationController.cotation.taxesgs}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Taxe PECAE</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="taxepecae" value="#{cotationController.cotation.taxepecea}"/>  
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-md-6">
+
+                                                        <label class="form-label">Reference</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="reference" value="#{cotationController.cotation.referance}" />  
+                                                        </div>
+
+                                                        <label class="form-label">Contribution Scanning</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="contributionscanning" value="#{cotationController.cotation.redId.scanning}" />  
+                                                        </div>
+
+                                                        <label class="form-label">Guce</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="guce" value="#{cotationController.cotation.redId.guce}" />  
+                                                        </div>
+
+                                                        <label class="form-label">PAD</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="pad" value="#{cotationController.cotation.redId.pad}" />  
+                                                        </div>
+
+                                                        <label class="form-label">Frais de timbre BL</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="fraistimbre" value="#{cotationController.cotation.redId.timbresurbl}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Acconage</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="acconage" value="#{cotationController.cotation.redId.acconage}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Assurance</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="assurance" value="#{cotationController.cotation.redId.assurance}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Phytosanitaire</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="phytosanitaire" value="#{cotationController.cotation.redId.phytosanitaire}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Controlle sanitaire</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="Controllesanitaire" value="#{cotationController.cotation.redId.controlsanitaire}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Commission sur transit</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;" id="commissiontransit" value="#{cotationController.cotation.redId.commisionsurtransit}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Commission sur debours</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;"  id="commissiondebours" value="#{cotationController.cotation.redId.commisionsurdebourse}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">HAD</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;"  id="had" value="#{cotationController.cotation.redId.had}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Frais d'ouverture dossier</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;"  id="Fraisdossier" value="#{cotationController.cotation.redId.ouverturedossier}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Travail extra legal (TEL)</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;"  id="travailextra" value="#{cotationController.cotation.redId.travailextralegal}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Caution</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;"  id="caution" value="#{cotationController.cotation.redId.caution}"/>  
+                                                        </div>
+
+                                                        <label class="form-label">Transport</label>
+                                                        <div>
+                                                            <h:inputText disabled="true" style="width: 90%; margin-bottom: 10px;"  id="transport" value="#{cotationController.cotation.redId.transport}"/>  
+                                                        </div>
+
+                                                    </div>  
+                                                </div>    
+                                            </div>
+                                            <center>
+                                                <p:commandButton class="btn waves-effect" style="background-color:  #1f897f; color: white; padding-left: 20px; padding-right: 20px;" onclick="javascript:printDiv('div3')" value="PRINT" />
+                                                <p:commandButton class="btn waves-effect" style="background-color: #fd6a61; color: white;" type="submit" value="RETURN" action="#{cotationController.returnListCotation()}" />
+                                            </center>
+                                        </h:form>
+
+                                        <iframe name="print_frame" width="0" height="0" title="COTATION" frameborder="1" src="about:blank"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+
+                    </f:view>
+                </section>
+                <script>
+                    printDivCSS = new String('<link href="css/myprintstyle.css" rel="stylesheet" type="text/css"/>');
+                    function printDiv(divId) {
+                        window.frames["print_frame"].document.body.innerHTML = printDivCSS + document.getElementById(divId).innerHTML;
+                        window.frames["print_frame"].window.focus();
+                        window.frames["print_frame"].window.print();
+                    }
+                </script>
+
+            </ui:define>
+
+        </ui:composition>
+
+
+
+    </body>
+</html>
+
+

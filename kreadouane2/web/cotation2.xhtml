@@ -1,0 +1,578 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+
+        <ui:composition template="./welcom_1.xhtml">
+
+            <ui:define name="content">
+                <f:view locale="#{sessionController.language}">
+                    <h:form id="form">
+                        <p:growl id="msg" showDetail="true" life="2000" /> 
+                        <h1><h:outputText style="color: white" value="liste des cotation"/></h1>
+
+                        <h:panelGrid columns="6">
+                            <p:commandButton icon="ui-icon-plus" widgetVar="add" partialSubmit="true" actionListener="#{cotationController.prepareCreate}" update=":form_tr:inputs,:form:msg" oncomplete="PF('wv_user').show()" value="#{lm.add}" style=" background-color: darkseagreen"/>
+                            <p:commandButton icon="ui-icon-check" value="consult"  partialSubmit="true" actionListener="#{cotationController.action}" update="form_consult:inputs1,form_consult:inputs2,:form:msg" oncomplete="PF('wv_consult').show()" style=" background-color: darkseagreen"/>
+                            <p:commandButton icon="ui-icon-refresh" update="table" actionListener="#{cotationController.init()}" value="#{lm.Refresh}" style=" background-color: darkseagreen"/>
+                            <h:commandLink>
+                                <img src="resources/image/Excel-icon-smaller.png" alt=""/>
+                                <p:dataExporter type="xls" target="table" fileName="CAD" postProcessor="#{print.postProcessXLS}" />
+                            </h:commandLink>    
+                            <h:commandLink>
+                                <img src="resources/image/Oficina-PDF-icon-smaller.png" alt=""/>
+                                <p:dataExporter type="pdf" target="table" fileName="CAD" preProcessor="#{print.preProcessPDF}" />
+                            </h:commandLink>
+                        </h:panelGrid>
+                        <p:dataTable selectionMode="single" selection="#{cotationController.cotation}" rowKey="#{item.id}" id="table" value="#{cotationController.listCotation}" var="item"  rows="4" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+                            <p:column filterBy="#{item.referance}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="Referance" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.referance}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.artId.description}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="Article" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.artId.description}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.datecreation}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="Date creation" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.datecreation}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.position}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="Position" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.position}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.conteneur}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="Conteneur" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.conteneur}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.montemp}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="Montemp" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.montemp}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.type}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="Type" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.type}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.utiId.name}#{item.utiId.surname}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="creator" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.utiId.name} #{item.utiId.surname}"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </h:form>
+
+                    <h:form id="form_tr">
+                        <p:dialog id="fm_user" modal="true" showEffect="fold" widgetVar="wv_user">
+
+                            <f:facet name="header">
+                                <center>
+                                    <h:outputText value="creation de cotation"/>
+                                </center>
+                            </f:facet>
+                            <h:panelGrid id="inputs" columns="2">
+
+                                <p:panel>
+                                    <h:panelGrid id="inputs1" columns="2">
+
+                                        <p:outputLabel value="Marchandise:" for="choisir" />
+                                        <p:selectOneMenu disabled="#{cotationController.operation.equals('delete')}" id="choisir" value="#{cotationController.nameArticle}"  panelStyle="width:180px"
+                                                         effect="fold" var="t" style="width:143px" filter="true" filterMatchMode="startsWith"  >
+                                            <p:ajax id="ajax4" listener="#{cotationController.marchandise}" update="Position,Taux,pecae" />
+                                            <f:selectItem itemLabel="Select one" itemValue="" />
+                                            <f:selectItems value="#{articleController.listArticle}" var="theme" itemLabel="#{theme.description}" itemValue="#{theme.description}" />
+                                            <p:column>
+                                                <h:outputText value="#{t}" />
+                                            </p:column>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="Position:" for="Position" />
+                                        <p:inputText disabled="#{cotationController.operation.equals('delete')}" id="Position" value="#{cotationController.article.code}" title="Position"/>
+
+
+                                        <p:outputLabel value="Taux:" for="Taux" />
+                                        <p:inputText disabled="#{cotationController.operation.equals('delete')}" id="Taux" value="#{cotationController.article.taxe}" title="Taux"/>
+
+                                    </h:panelGrid>
+                                </p:panel>
+                                <p:panel>
+                                    <h:panelGrid id="inputs2" columns="2" style="height: 100px;">
+
+                                        <p:outputLabel value="PECAE:" for="pecae" />
+                                        <p:selectOneMenu disabled="#{cotationController.operation.equals('delete')}" id="pecae" value="#{cotationController.article.pecae}" style="width:166px" effect="fold">
+                                            <f:selectItem itemLabel="Select one"/>
+                                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                                            <f:selectItem itemLabel="No" itemValue="0"/>
+                                        </p:selectOneMenu> 
+
+                                    </h:panelGrid>
+                                </p:panel>
+
+                                <p:panel>
+                                    <h:panelGrid id="inputs3" columns="2" style="height: 100px;">
+
+                                        <p:outputLabel value="Montempt de facture:" for="namew" />
+
+                                        <p:inputNumber symbolPosition="s" emptyValue="sign" symbol="XFA" decimalPlaces="3" disabled="#{cotationController.operation.equals('delete')}" id="namew" value="#{cotationController.montempFacture}" title="Name" >
+                                            <p:ajax id="ajax1" event="keyup" listener="#{cotationController.valeurFOB}" update="namea,namey" />
+                                        </p:inputNumber>
+
+                                        <h:outputText rendered="false" style="color: white;" id="out" value="#{cotationController.montempFacture}" />
+
+
+                                        <p:outputLabel value="Incoterm:" for="Incoderm" />
+                                        <p:selectOneMenu disabled="#{cotationController.operation.equals('delete')}" id="Incoderm" value="#{cotationController.incoterm}" style="width:166px" effect="fold">
+                                            <p:ajax id="ajax3" listener="#{cotationController.valeurFOB}" update="namea,namey" />
+                                            <f:selectItem itemLabel="Select one"/>
+                                            <f:selectItem itemLabel="FOB" itemValue="FOB" />
+                                            <f:selectItem itemLabel="CIF" itemValue="CIF"/>
+                                            <f:selectItem itemLabel="CFR" itemValue="CFR" />
+                                            <f:selectItem itemLabel="CIP" itemValue="CIP"/>
+                                            <f:selectItem itemLabel="CPT" itemValue="CPT" />
+                                            <f:selectItem itemLabel="DAF" itemValue="DAF"/>
+                                            <f:selectItem itemLabel="DDP" itemValue="DDP" />
+                                            <f:selectItem itemLabel="DDU" itemValue="DDU"/>
+                                            <f:selectItem itemLabel="DEQ" itemValue="DEQ" />
+                                            <f:selectItem itemLabel="DES" itemValue="DES"/>
+                                            <f:selectItem itemLabel="EXW" itemValue="EXW" />
+                                            <f:selectItem itemLabel="FAS" itemValue="FAS"/>
+                                            <f:selectItem itemLabel="FCA" itemValue="FCA" />
+
+                                        </p:selectOneMenu>
+                                    </h:panelGrid>
+                                </p:panel>
+
+                                <p:panel>
+                                    <h:panelGrid id="input4" columns="2" style="height: 100px;">
+
+                                        <p:outputLabel value="Valeur FOB:" for="namea" />
+                                        <p:inputNumber symbolPosition="s" emptyValue="sign" symbol="XFA" decimalPlaces="3" disabled="#{cotationController.operation.equals('delete')}" id="namea" value="#{cotationController.valeurFOB}" title="Name">
+                                            <p:ajax event="keyup" id="ajax2" listener="#{cotationController.valeurAssurance}" update="namey" />
+                                        </p:inputNumber>
+
+                                    </h:panelGrid>
+                                </p:panel>
+
+                                <p:panel>
+                                    <h:panelGrid columns="2">
+
+                                        <p:outputLabel value="type de contenaire:" for="namet" />
+                                        <p:selectOneMenu disabled="#{cotationController.operation.equals('delete')}" id="namet" value="#{cotationController.cotation.conteneur}"  style="width:166px" effect="fold">
+                                            <f:selectItem itemLabel="Select one"/>
+                                            <f:selectItem itemLabel="20" itemValue="20" />
+                                            <f:selectItem itemLabel="40" itemValue="40"/>
+
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="Poid:" for="namete" />
+                                        <p:inputNumber symbolPosition="s" emptyValue="sign" symbol="kg" decimalPlaces="3" disabled="#{cotationController.operation.equals('delete')}" id="namete" value="#{cotationController.poids}" title="Name"/>
+
+                                        <p:outputLabel value="Montemp du fret:" for="nametr" />
+                                        <p:inputNumber symbolPosition="s" emptyValue="sign" symbol="XFA" decimalPlaces="3" disabled="#{cotationController.operation.equals('delete')}" id="nametr" value="#{cotationController.montantFret}" title="Name"/>
+
+                                    </h:panelGrid>
+                                </p:panel>
+
+                                <p:panel>
+                                    <h:panelGrid columns="2" style="height: 100px;">
+
+                                        <p:outputLabel value="Montemp assurance:" for="namey" />
+                                        <p:inputNumber symbol="XFA" symbolPosition="s" emptyValue="sign" decimalPlaces="3" disabled="#{cotationController.operation.equals('delete')}" id="namey" value="#{cotationController.assurance}" title="Name" />
+
+                                        <p:outputLabel value="Transport(sortie du port):" for="nametee" />
+                                        <p:inputNumber symbol="XFA" symbolPosition="s" emptyValue="sign" decimalPlaces="3" disabled="#{cotationController.operation.equals('delete')}" id="nametee" value="#{cotationController.transport}" title="Name" />
+
+                                    </h:panelGrid>
+                                </p:panel>
+
+                                <p:panel>
+                                    <h:panelGrid columns="2">
+
+                                        <p:outputLabel value="Taux du droit d'accise:" for="namex" />
+                                        <p:selectOneMenu disabled="#{cotationController.operation.equals('delete')}" id="namex" value="#{cotationController.droitDaccise}" style="width:166px" effect="fold">
+                                            <f:selectItem itemLabel="0" itemValue="0" />
+                                            <f:selectItem itemLabel="12.5" itemValue="12.5"/>
+                                            <f:selectItem itemLabel="25" itemValue="25"/>
+                                        </p:selectOneMenu>
+
+                                    </h:panelGrid>
+                                </p:panel>
+
+                                <p:panel>
+                                    <h:panelGrid columns="2">
+
+                                        <p:outputLabel value="Taux du PRC:" for="namef" />
+                                        <p:selectOneMenu disabled="#{cotationController.operation.equals('delete')}" id="namef" value="#{cotationController.tauxPRC}" required="true"  style="width:166px" effect="fold">
+                                            <f:selectItem itemLabel="0" itemValue="0" />
+                                            <f:selectItem itemLabel="2" itemValue="2"/>
+                                        </p:selectOneMenu>
+
+                                    </h:panelGrid>
+                                </p:panel>
+
+
+
+                            </h:panelGrid>
+                            <f:facet name="footer">
+                                <center>
+
+                                    <p:commandButton oncomplete="PF('wv_utilisateurs').show()" actionListener="#{cotationController.calculer()}"  update=":form_trs:inputs1,:form_trs:inputs2, inputs, inputs3, input4" icon="ui-icon-check"  value="calculer" style=" background-color: darkseagreen"/>
+                                </center>
+                            </f:facet>
+                        </p:dialog>
+                    </h:form>
+
+
+                    <h:form id="form_p">
+                        <p:dialog header="ERROR!" widgetVar="dlg2" modal="true" height="100">
+                            <h:outputText value="#{lm.thisagentalreadyexist}" />
+                        </p:dialog>   
+                    </h:form>
+
+                    <h:form id="form_trs">
+
+                        <p:dialog id="fm_utilisateurs" modal="true" showEffect="fade" widgetVar="wv_utilisateurs">
+
+                            <h:panelGrid id="inputs1" columns="2" >
+                                <p:panel style="width: 380px;">
+                                    <p:outputLabel value="Reference:" for="reference" />
+                                    <p:inputText disabled="true" id="reference" value="#{cotationController.cotation.referance}" title="Reference" />
+                                    <p:message for="reference"/>
+                                </p:panel>
+                                <p:panel style="width: 380px;">
+                                    <p:outputLabel value="Total:" for="total" />
+                                    <p:inputText disabled="true"  id="total" value="#{cotationController.cotation.montemp}" title="Total" />
+                                    <p:message for="total"/>
+                                </p:panel>
+                            </h:panelGrid>
+                            <h:panelGrid id="inputs2"  columns="2" >
+                                <h:panelGrid  columns="1" >
+                                    <p:panel style="width: 380px;">
+                                        <p:outputLabel value="Position:" for="position" />
+                                        <p:inputText disabled="true"  id="position" value="#{cotationController.article.code}" title="Position" />
+                                        <p:message for="position"/>
+
+                                        <p:outputLabel value="Libelle:" for="libelle" />
+                                        <p:inputText disabled="true"  id="libelle" value="#{cotationController.article.description}" title="Libelle" />
+                                        <p:message for="libelle"/>
+
+                                        <p:outputLabel value="Type de conteneur:" for="typedeconteneur" />
+                                        <p:inputText disabled="true" id="typedeconteneur" value="#{cotationController.cotation.conteneur}" title="Type de conteneur" />
+                                        <p:message for="typedeconteneur"/>
+
+                                    </p:panel>
+                                    <p:panel style="width: 380px;">
+                                        <p:outputLabel value="Valeur imposable (VI):" for="Valeurimposable" />
+                                        <p:inputText disabled="true" id="Valeurimposable" value="#{cotationController.cotation.valeurimposable}" title="Valeur imposable" />
+                                        <p:message for="Valeurimposable"/>
+
+                                        <p:outputLabel value="Droit de douane (DDI):" for="Droitdouane" />
+                                        <p:inputText disabled="true" id="Droitdouane" value="#{cotationController.cotation.droitdedouane}" title="Droit de douane" />
+                                        <p:message for="Droitdouane"/>
+
+                                        <p:outputLabel value="Droit d'accise (DA):" for="droitaccise" />
+                                        <p:inputText disabled="true" id="droitaccise" value="#{cotationController.cotation.droitdaccise}" title="Droit d'accise" />
+                                        <p:message for="droitaccise"/>
+
+                                        <p:outputLabel value="TVA + CAC" for="tva" />
+                                        <p:inputText disabled="true" id="tva" value="#{cotationController.cotation.tvacac}" title="TVA + CAC" />
+                                        <p:message for="tva"/>
+
+                                        <p:outputLabel value="Precompte sur achat (PRC):" for="precompteachat" />
+                                        <p:inputText disabled="true" id="precompteachat" value="#{cotationController.cotation.precomptesurachat}" title="Precompte sur achat" />
+                                        <p:message for="precompteachat"/>
+
+                                        <p:outputLabel value="CCI:" for="cci" />
+                                        <p:inputText disabled="true" id="cci" value="#{cotationController.cotation.cci}" title="CCI" />
+                                        <p:message for="cci"/>
+
+                                        <p:outputLabel value="TCI:" for="tci" />
+                                        <p:inputText disabled="true" id="tci" value="#{cotationController.cotation.tci}" title="TCI" />
+                                        <p:message for="tci"/>
+
+                                        <p:outputLabel value="TO:" for="to" />
+                                        <p:inputText disabled="true" id="to" value="#{cotationController.cotation.t0}" title="TO" />
+                                        <p:message for="to"/>
+
+                                        <p:outputLabel value="CIA:" for="cia" />
+                                        <p:inputText disabled="true" id="cia" value="#{cotationController.cotation.cia}" title="CIA" />
+                                        <p:message for="cia"/>
+
+                                        <p:outputLabel value="RI:" for="ri" />
+                                        <p:inputText disabled="true" id="ri" value="#{cotationController.cotation.ri}" title="RI" />
+                                        <p:message for="ri"/>
+
+                                        <p:outputLabel value="Taxe SGS" for="taxesgs" />
+                                        <p:inputText disabled="true" id="taxesgs" value="#{cotationController.cotation.taxesgs}" title="Taxe SGS" />
+                                        <p:message for="taxesgs"/>
+
+                                        <p:outputLabel value="Taxe PECAE" for="taxepecae" />
+                                        <p:inputText disabled="true" id="taxepecae" value="#{cotationController.cotation.taxepecea}" title="Taxe PECAE" />
+                                        <p:message for="taxepecae"/>
+
+                                    </p:panel>
+                                </h:panelGrid>
+                                <p:panel style="width: 380px; height: 480px;">
+                                    <p:outputLabel value="Contribution Scanning:" for="contributionscanning" />
+                                    <p:inputText disabled="true" id="contributionscanning" value="#{cotationController.redevanceservice.scanning}" title="Contribution Scanning" />
+                                    <p:message for="contributionscanning"/>
+
+                                    <p:outputLabel value="Guce:" for="guce" />
+                                    <p:inputText disabled="true" id="guce" value="#{cotationController.redevanceservice.guce}" title="Guce" />
+                                    <p:message for="guce"/>
+
+                                    <p:outputLabel value="PAD" for="pad" />
+                                    <p:inputText disabled="true" id="pad" value="#{cotationController.redevanceservice.pad}" title="PAD" />
+                                    <p:message for="pad"/>
+
+                                    <p:outputLabel value="Frais de timbre BL:" for="fraistimbre" />
+                                    <p:inputText disabled="true" id="fraistimbre" value="#{cotationController.redevanceservice.timbresurbl}" title="Frais de timbre BL" />
+                                    <p:message for="fraistimbre"/>
+
+                                    <p:outputLabel value="Acconage" for="acconage" />
+                                    <p:inputText disabled="true" id="acconage" value="#{cotationController.redevanceservice.acconage}" title="Acconage" />
+                                    <p:message for="acconage"/>
+
+                                    <p:outputLabel value="Assurance" for="assurance" />
+                                    <p:inputText disabled="true" id="assurance" value="#{cotationController.redevanceservice.assurance}" title="Assurance" />
+                                    <p:message for="assurance"/>
+
+                                    <p:outputLabel value="Phytosanitaire" for="phytosanitaire" />
+                                    <p:inputText disabled="true" id="phytosanitaire" value="#{cotationController.redevanceservice.phytosanitaire}" title="Phytosanitaire" />
+                                    <p:message for="phytosanitaire"/>
+
+                                    <p:outputLabel value="Controlle sanitaire" for="Controllesanitaire" />
+                                    <p:inputText disabled="true" id="Controllesanitaire" value="#{cotationController.redevanceservice.controlsanitaire}" title="Controlle sanitaire" />
+                                    <p:message for="Controllesanitaire"/>
+
+                                    <p:outputLabel value="Commission sur transit" for="commissiontransit" />
+                                    <p:inputText disabled="true" id="commissiontransit" value="#{cotationController.redevanceservice.commisionsurtransit}" title="commission sur transit" />
+                                    <p:message for="commissiontransit"/>
+
+                                    <p:outputLabel value="Commission sur debours" for="commissiontransit" />
+                                    <p:inputText disabled="true" id="commissiondebours" value="#{cotationController.redevanceservice.commisionsurdebourse}" title="commission sur debours" />
+                                    <p:message for="commissiondebours"/>
+
+                                    <p:outputLabel value="HAD" for="had" />
+                                    <p:inputText disabled="true" id="had" value="#{cotationController.redevanceservice.had}" title="had" />
+                                    <p:message for="had"/>
+
+                                    <p:outputLabel value="Frais d'ouverture dossier" for="Fraisdossier" />
+                                    <p:inputText disabled="true" id="Fraisdossier" value="#{cotationController.redevanceservice.ouverturedossier}" title="Frais d'ouverture dossier" />
+                                    <p:message for="Fraisdossier"/>
+
+                                    <p:outputLabel value="Travail extra legal (TEL)" for="travailextra" />
+                                    <p:inputText disabled="true" id="travailextra" value="#{cotationController.redevanceservice.travailextralegal}" title="Travail extra legal" />
+                                    <p:message for="travailextra"/>
+
+                                    <p:outputLabel value="Caution" for="caution" />
+                                    <p:inputText disabled="true" id="caution" value="#{cotationController.redevanceservice.caution}" title="Caution" />
+                                    <p:message for="caution"/>
+
+                                    <p:outputLabel value="Transport" for="transport" />
+                                    <p:inputText disabled="true" id="transport" value="#{cotationController.redevanceservice.transport}" title="Transport" />
+                                    <p:message for="transport"/>
+                                </p:panel>
+
+                            </h:panelGrid>
+                            <f:facet name="footer">
+                                <center>
+                                    <p:commandButton style="margin-right: 50px;" icon="ui-icon-check" partialSubmit="true" update=":form:table"  actionListener="#{cotationController.saveCotation()}" value="Enregistrer"/>
+                                    <p:commandButton icon="ui-icon-check" oncomplete="PF('wv_utilisateurs').hide()" value="Imprimer"/>
+                                    <p:commandButton icon="ui-icon-check" oncomplete="PF('wv_utilisateurs').hide()" value="Enregistrer/Imprimer"/>
+
+                                </center>
+                            </f:facet>
+                        </p:dialog>
+                    </h:form>
+
+
+
+                    <h:form id="form_consult">
+
+                        <p:dialog id="fm_consult" modal="true" showEffect="fade" widgetVar="wv_consult">
+
+                            <h:panelGrid id="inputs1" columns="2" >
+                                <p:panel style="width: 380px;">
+                                    <p:outputLabel value="Reference:" for="reference" />
+                                    <p:inputText disabled="true" id="reference" value="#{cotationController.cotation.referance}" title="Reference" />
+                                    <p:message for="reference"/>
+                                </p:panel>
+                                <p:panel style="width: 380px;">
+                                    <p:outputLabel value="Total:" for="total" />
+                                    <p:inputText disabled="true"  id="total" value="#{cotationController.cotation.montemp}" title="Total" />
+                                    <p:message for="total"/>
+                                </p:panel>
+                            </h:panelGrid>
+                            <h:panelGrid id="inputs2"  columns="2" >
+                                <h:panelGrid  columns="1" >
+                                    <p:panel style="width: 380px;">
+                                        <p:outputLabel value="Position:" for="position" />
+                                        <p:inputText disabled="true"  id="position" value="#{cotationController.cotation.artId.code}" title="Position" />
+                                        <p:message for="position"/>
+
+                                        <p:outputLabel value="Libelle:" for="libelle" />
+                                        <p:inputText disabled="true"  id="libelle" value="#{cotationController.cotation.artId.description}" title="Libelle" />
+                                        <p:message for="libelle"/>
+
+                                        <p:outputLabel value="Type de conteneur:" for="typedeconteneur" />
+                                        <p:inputText disabled="true" id="typedeconteneur" value="#{cotationController.cotation.conteneur}" title="Type de conteneur" />
+                                        <p:message for="typedeconteneur"/>
+
+                                    </p:panel>
+                                    <p:panel style="width: 380px;">
+                                        <p:outputLabel value="Valeur imposable (VI):" for="Valeurimposable" />
+                                        <p:inputText disabled="true" id="Valeurimposable" value="#{cotationController.cotation.valeurimposable}" title="Valeur imposable" />
+                                        <p:message for="Valeurimposable"/>
+
+                                        <p:outputLabel value="Droit de douane (DDI):" for="Droitdouane" />
+                                        <p:inputText disabled="true" id="Droitdouane" value="#{cotationController.cotation.droitdedouane}" title="Droit de douane" />
+                                        <p:message for="Droitdouane"/>
+
+                                        <p:outputLabel value="Droit d'accise (DA):" for="droitaccise" />
+                                        <p:inputText disabled="true" id="droitaccise" value="#{cotationController.cotation.droitdaccise}" title="Droit d'accise" />
+                                        <p:message for="droitaccise"/>
+
+                                        <p:outputLabel value="TVA + CAC" for="tva" />
+                                        <p:inputText disabled="true" id="tva" value="#{cotationController.cotation.tvacac}" title="TVA + CAC" />
+                                        <p:message for="tva"/>
+
+                                        <p:outputLabel value="Precompte sur achat (PRC):" for="precompteachat" />
+                                        <p:inputText disabled="true" id="precompteachat" value="#{cotationController.cotation.precomptesurachat}" title="Precompte sur achat" />
+                                        <p:message for="precompteachat"/>
+
+                                        <p:outputLabel value="CCI:" for="cci" />
+                                        <p:inputText disabled="true" id="cci" value="#{cotationController.cotation.cci}" title="CCI" />
+                                        <p:message for="cci"/>
+
+                                        <p:outputLabel value="TCI:" for="tci" />
+                                        <p:inputText disabled="true" id="tci" value="#{cotationController.cotation.tci}" title="TCI" />
+                                        <p:message for="tci"/>
+
+                                        <p:outputLabel value="TO:" for="to" />
+                                        <p:inputText disabled="true" id="to" value="#{cotationController.cotation.t0}" title="TO" />
+                                        <p:message for="to"/>
+
+                                        <p:outputLabel value="CIA:" for="cia" />
+                                        <p:inputText disabled="true" id="cia" value="#{cotationController.cotation.cia}" title="CIA" />
+                                        <p:message for="cia"/>
+
+                                        <p:outputLabel value="RI:" for="ri" />
+                                        <p:inputText disabled="true" id="ri" value="#{cotationController.cotation.ri}" title="RI" />
+                                        <p:message for="ri"/>
+
+                                        <p:outputLabel value="Taxe SGS" for="taxesgs" />
+                                        <p:inputText disabled="true" id="taxesgs" value="#{cotationController.cotation.taxesgs}" title="Taxe SGS" />
+                                        <p:message for="taxesgs"/>
+
+                                        <p:outputLabel value="Taxe PECAE" for="taxepecae" />
+                                        <p:inputText disabled="true" id="taxepecae" value="#{cotationController.cotation.taxepecea}" title="Taxe PECAE" />
+                                        <p:message for="taxepecae"/>
+
+                                    </p:panel>
+                                </h:panelGrid>
+                                <p:panel style="width: 380px; height: 480px;">
+                                    <p:outputLabel value="Contribution Scanning:" for="contributionscanning" />
+                                    <p:inputText disabled="true" id="contributionscanning" value="#{cotationController.cotation.redId.scanning}" title="Contribution Scanning" />
+                                    <p:message for="contributionscanning"/>
+
+                                    <p:outputLabel value="Guce:" for="guce" />
+                                    <p:inputText disabled="true" id="guce" value="#{cotationController.cotation.redId.guce}" title="Guce" />
+                                    <p:message for="guce"/>
+
+                                    <p:outputLabel value="PAD" for="pad" />
+                                    <p:inputText disabled="true" id="pad" value="#{cotationController.cotation.redId.pad}" title="PAD" />
+                                    <p:message for="pad"/>
+
+                                    <p:outputLabel value="Frais de timbre BL:" for="fraistimbre" />
+                                    <p:inputText disabled="true" id="fraistimbre" value="#{cotationController.cotation.redId.timbresurbl}" title="Frais de timbre BL" />
+                                    <p:message for="fraistimbre"/>
+
+                                    <p:outputLabel value="Acconage" for="acconage" />
+                                    <p:inputText disabled="true" id="acconage" value="#{cotationController.cotation.redId.acconage}" title="Acconage" />
+                                    <p:message for="acconage"/>
+
+                                    <p:outputLabel value="Assurance" for="assurance" />
+                                    <p:inputText disabled="true" id="assurance" value="#{cotationController.cotation.redId.assurance}" title="Assurance" />
+                                    <p:message for="assurance"/>
+
+                                    <p:outputLabel value="Phytosanitaire" for="phytosanitaire" />
+                                    <p:inputText disabled="true" id="phytosanitaire" value="#{cotationController.cotation.redId.phytosanitaire}" title="Phytosanitaire" />
+                                    <p:message for="phytosanitaire"/>
+
+                                    <p:outputLabel value="Controlle sanitaire" for="Controllesanitaire" />
+                                    <p:inputText disabled="true" id="Controllesanitaire" value="#{cotationController.cotation.redId.controlsanitaire}" title="Controlle sanitaire" />
+                                    <p:message for="Controllesanitaire"/>
+
+                                    <p:outputLabel value="Commission sur transit" for="commissiontransit" />
+                                    <p:inputText disabled="true" id="commissiontransit" value="#{cotationController.cotation.redId.commisionsurtransit}" title="commission sur transit" />
+                                    <p:message for="commissiontransit"/>
+
+                                    <p:outputLabel value="Commission sur debours" for="commissiontransit" />
+                                    <p:inputText disabled="true" id="commissiondebours" value="#{cotationController.cotation.redId.commisionsurdebourse}" title="commission sur debours" />
+                                    <p:message for="commissiondebours"/>
+
+                                    <p:outputLabel value="HAD" for="had" />
+                                    <p:inputText disabled="true" id="had" value="#{cotationController.cotation.redId.had}" title="had" />
+                                    <p:message for="had"/>
+
+                                    <p:outputLabel value="Frais d'ouverture dossier" for="Fraisdossier" />
+                                    <p:inputText disabled="true" id="Fraisdossier" value="#{cotationController.cotation.redId.ouverturedossier}" title="Frais d'ouverture dossier" />
+                                    <p:message for="Fraisdossier"/>
+
+                                    <p:outputLabel value="Travail extra legal (TEL)" for="travailextra" />
+                                    <p:inputText disabled="true" id="travailextra" value="#{cotationController.cotation.redId.travailextralegal}" title="Travail extra legal" />
+                                    <p:message for="travailextra"/>
+
+                                    <p:outputLabel value="Caution" for="caution" />
+                                    <p:inputText disabled="true" id="caution" value="#{cotationController.cotation.redId.caution}" title="Caution" />
+                                    <p:message for="caution"/>
+
+                                    <p:outputLabel value="Transport" for="transport" />
+                                    <p:inputText disabled="true" id="transport" value="#{cotationController.cotation.redId.transport}" title="Transport" />
+                                    <p:message for="transport"/>
+                                </p:panel>
+
+                            </h:panelGrid>
+                            <f:facet name="footer">
+                                <center>
+                                    <p:commandButton icon="ui-icon-check" oncomplete="PF('wv_consult').hide()" value="Imprimer"/>
+                                    <p:commandButton icon="cross" oncomplete="PF('wv_consult').hide()" value="Fermer"/>
+
+                                </center>
+                            </f:facet>
+                        </p:dialog>
+                    </h:form>
+
+
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+
+
+

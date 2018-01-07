@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="container">
+                <section class="content">
+                    <div><h4 style=" margin-top: 1px; margin-bottom: 15px;">Liste des regimes douanier</h4></div>
+                    <f:view locale="#{sessionController.language}">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    <div class="body">
+                                        <h:form id="form">
+                                            <p:growl id="msg" showDetail="true" life="2000" /> 
+                                            
+                                            <b style="margin-left: 860px;">Exporter en:</b>
+                                            <h:commandLink style="margin-bottom: 10px; margin-left: 20px;">
+
+                                                <img src="resources/image/Excel-icon-smaller.png" alt=""/>
+                                                <p:dataExporter type="xls" target="table" fileName="article" postProcessor="#{print.postProcessXLS}" />
+                                            </h:commandLink>    
+                                            <h:commandLink>
+                                                <img src="resources/image/Oficina-PDF-icon-smaller.png" alt=""/>
+                                                <p:dataExporter type="pdf" target="table" fileName="article" preProcessor="#{print.preProcessPDF}" />
+                                            </h:commandLink>
+                                           
+                                            <p:dataTable selectionMode="single" selection="#{regimedouanierController.regimedouanier}" rowKey="#{item.id}" id="table" value="#{regimedouanierController.listRegimedouanier}" var="item" class="borderless" scrollable="true" scrollHeight="380" reflow="true">
+
+                                                <p:column  style="width: 80px;">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Code" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.code}"/>
+                                                </p:column>
+                                                
+                                                <p:column >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Libelle" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.libelle}"/>
+                                                </p:column>
+                                                
+
+
+                                            </p:dataTable>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+
+                    </f:view>
+                </section>
+
+            </ui:define>
+
+        </ui:composition>
+
+
+
+    </body>
+</html>
+
+

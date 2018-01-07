@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:body>
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="container">
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="block-header">
+                            <h2>DASHBOARD</h2>
+                        </div>
+
+                        <!-- Widgets -->
+                        <div class="row clearfix">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="info-box bg-pink hover-expand-effect">
+                                    <div class="icon">
+                                        <i class="material-icons">playlist_add_check</i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="text">ACCONIER</div>
+                                        <div class="number count-to" data-from="0" data-to="#{statistics.numberAcconier}" data-speed="15" data-fresh-interval="20"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="info-box bg-cyan hover-expand-effect">
+                                    <div class="icon">
+                                        <i class="material-icons">person</i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="text">UTILISATEUR</div>
+                                        <div class="number count-to" data-from="0" data-to="#{statistics.numberUtilisateur}" data-speed="1000" data-fresh-interval="20"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="info-box bg-light-green hover-expand-effect">
+                                    <div class="icon">
+                                        <i class="material-icons">forum</i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="text">CAD</div>
+                                        <div class="number count-to" data-from="0" data-to="#{statistics.numberCad}" data-speed="1000" data-fresh-interval="20"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="info-box bg-orange hover-expand-effect">
+                                    <div class="icon">
+                                        <i class="material-icons">directions_bus</i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="text">TRANSPORTEUR</div>
+                                        <div class="number count-to" data-from="0" data-to="#{statistics.numberTransporteur}" data-speed="1000" data-fresh-interval="20"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- #END# Widgets -->
+                        <!-- CPU Usage -->
+                        <div class="row clearfix">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <div class="row clearfix">
+                                            <div class="col-xs-12 col-sm-6">
+                                                <h2>CPU USAGE (%)</h2>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 align-right">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="body">
+                                        <div id="real_time_chart" class="dashboard-flot-chart"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- #END# CPU Usage -->
+                    </div>
+                </section>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
+

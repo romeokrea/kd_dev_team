@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+
+        <meta charset="UTF-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+        <title>Buttons | Bootstrap Based Admin Template - Material Design</title>
+        <!-- Favicon-->
+        <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+
+        <!-- Google Fonts -->
+
+        <!-- Bootstrap Core Css -->
+        <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+
+        <!-- Waves Effect Css -->
+        <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+        <!-- Animation Css -->
+        <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+        <!-- Custom Css -->
+        <link href="css/style.css" rel="stylesheet"/>
+
+        <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+        <link href="css/themes/all-themes.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="container">
+                <section class="content" id="fm_user" modal="true" showEffect="fold" widgetVar="wv_userEdit">
+                    <div><h4 style=" margin-top: 1px; margin-bottom: 15px;">Liste des banques</h4></div>
+                    <!--<div class="container-fluid">-->
+                    <f:view locale="#{sessionController.language}">
+
+
+                        
+
+
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    <div class="body">
+                                        <h:form id="form">
+                                            <p:growl id="msg" showDetail="true" life="2000" /> 
+
+                                            <p:commandButton icon="ui-icon-plus" class="waves-effect" value="add" action="#{banqueController.create()}" style=" background-color: #1f897f; margin-bottom: 5px; color: white;"/>
+
+                          
+
+                                               <b style="margin-left: 770px;">Exporter en:</b>
+                                            <h:commandLink style="margin-bottom: 10px; margin-left: 20px;">
+
+                                                <img src="resources/image/Excel-icon-smaller.png" alt=""/>
+                                                <p:dataExporter type="xls" target="table" fileName="Banque" postProcessor="#{print.postProcessXLS}" />
+                                            </h:commandLink>    
+                                            <h:commandLink style="margin-bottom: 10px;">
+                                                <img src="resources/image/Oficina-PDF-icon-smaller.png" alt=""/>
+                                                <p:dataExporter type="pdf" target="table" fileName="Banque" preProcessor="#{print.preProcessPDF}" />
+                                            </h:commandLink>
+                                            
+
+   <p:dataTable selectionMode="single" selection="#{banqueController.banque}" rowKey="#{item.id}" id="table" value="#{banqueController.listBanque}" var="item" class="borderless" scrollable="true" scrollHeight="380" reflow="true">
+
+                                                <p:column filterBy="#{item.namecompany}" style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Name of company" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.namecompany}"/>
+                                                </p:column>
+                                                <p:column filterBy="#{item.adressecompany}" style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="adress of company" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.adressecompany}"/>
+                                                </p:column>
+                                                <p:column filterBy="#{item.emailcompany}" style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="email of company" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.emailcompany}"/>
+                                                </p:column>
+                                                <p:column filterBy="#{item.phonecontribuable}" style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="taxe payer number" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.phonecontribuable}"/>
+                                                </p:column>
+                                                <p:column filterBy="" style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="option" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    
+                                                   
+                                                     <center>
+                                                    <p:commandButton icon="ui-icon-lightbulb" actionListener="#{banqueController.contacts}" action="#{contactsController.contactsBanq()}" style=" background-color: #0066cc;"/>
+                                                    <p:commandButton icon="ui-icon-pencil" action="#{banqueController.modifBanq()}" style=" background-color: #1f897f;"/>
+                                                    <p:commandButton icon="ui-icon-trash" action="#{banqueController.deleteBanque()}" update="form:table" style=" background-color: #E60415;"/>
+                                                    </center>
+                                         </p:column>
+
+                                            </p:dataTable>
+
+
+
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </f:view>
+                    <!--</div>-->
+                </section>
+            </ui:define>
+
+        </ui:composition>
+        <!-- Jquery Core Js -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap Core Js -->
+        <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+        <!-- Select Plugin Js -->
+        <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+        <!-- Slimscroll Plugin Js -->
+        <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+        <!-- Bootstrap Notify Plugin Js -->
+        <script src="plugins/bootstrap-notify/bootstrap-notify.js"></script>
+
+        <!-- Waves Effect Plugin Js -->
+        <script src="plugins/node-waves/waves.js"></script>
+
+        <!-- Custom Js -->
+        <script src="js/admin.js"></script>
+
+        <!-- Demo Js -->
+        <script src="js/demo.js"></script>
+    </body>
+</html>
+

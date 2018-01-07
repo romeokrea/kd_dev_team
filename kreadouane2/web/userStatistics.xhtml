@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{sessionController.watchOut()}" />
+    </f:metadata>
+    <body>
+
+        <ui:composition template="./welcom.xhtml">
+
+            <ui:define name="content">
+                
+                <div>
+                    <span style="float: left;"><h1 style="color: white; padding-left: 5px; margin: 7px;">Dashboard</h1></span>
+                    <span style="float: right;"><p:commandButton icon="ui-icon-refresh" actionListener="#{statistics.init()}" update=":panel2" style=" background-color: #66a870; margin-right: 30px; margin-top: 1px; padding: 5px; padding-left: 2px; padding-right: 2px"/></span>
+                    <span style="float: right; color: white; font-weight: normal; margin-right: 5px;"><h3>(always refresh before view) </h3></span>
+                </div>
+                <p:panelGrid id="panel2" columns="4" style="border: 1px solid #000; background-color:  transparent;">
+                    <p:panelGrid  columns="2" style="border: 1px solid #000; height: 80px; width: 250px; margin-right: 23px;  background-color: white;">
+                        <img src="resources/image/statForest.png" alt="" height="82px" style="background-color: #459eae; padding-left: 0px; padding-right: 0px;"/>
+                        <h:outputText value="ACCONIER #{statistics.numberAcconier}" style="font-size: 20px; width: 232px;" />
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" style="border: 1px solid #000; height: 80px; width: 232px; margin-right: 23px; background-color: white; ">
+                        <img src="resources/image/statPost.png" alt="" style="background-color: #e15656; padding-left: 20px; padding-right: 20px;"/>
+                        <h:outputText value="USER #{statistics.numberUtilisateur}" style="font-size: 20px;"/>
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" style="border: 1px solid #000; height: 80px; width: 232px; margin-right: 23px; background-color: white; ">
+                        <img src="resources/image/statSale.png" alt="" height="82px" style="background-color: #4b9b73; padding-left: 20px; padding-right: 20px;"/>
+                        <h:outputText value="CAD #{statistics.numberCad}" style="font-size: 20px;" />
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" style="border: 1px solid #000; height: 80px; width: 300px; background-color: white;">
+                        <img src="resources/image/statTree.png" alt=""  style="background-color: #e69035; padding-left: 20px; padding-right: 20px;"/>
+                        <h:outputText value="TRANSPORTEUR #{statistics.numberTransporteur}" style="font-size: 20px; width: 232px;" />
+                    </p:panelGrid>
+                </p:panelGrid>
+                
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+
+
+
+

@@ -1,0 +1,19 @@
+body {
+    font-size: 12px;
+    margin: auto;
+    overflow: auto;
+    width: auto;
+}
+
+
+a:link, a:visited {
+  color: #263238;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+  color: #045491;
+  font-weight : bold;
+  text-decoration : underline;
+}

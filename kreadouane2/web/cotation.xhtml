@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="container">
+
+                <h:form id="form2"><p:growl id="msg" showDetail="true" /></h:form>
+                <section class="content"> 
+                    <h4 style=" margin-top: 1px; margin-bottom: 15px;">Nouvelle cotation</h4>
+                    <f:view locale="#{sessionController.language}">
+                       
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    
+                                    <div class="body">
+                                        <h:form>
+                                            <h:panelGroup id="marchandise">
+                                                <div class="row clearfix">
+                                                    <div class="col-md-6">
+                                                        <br/>
+                                                        <label class="form-label" style="margin-right: 10px;">Marchandise</label>
+                                                        <p:commandButton class="waves-effect" style="background-color: #1f897f; color: white;" type="submit" value="Choose..." action="#{cotationController.chooseArticle()}" />
+
+
+                                                        <br/><br/>
+
+                                                        <label class="form-label">Position</label>
+                                                        <div>
+                                                            <h:inputText style="width: 90%;" value="#{cotationController.article.code}" />                                                        
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Taux</label>
+                                                        <div>
+                                                            <h:inputText style="width: 90%;" value="#{cotationController.article.taxe}" />
+                                                        </div>
+
+                                                        <br/>
+
+                                                        <label class="form-label">PECAE</label>
+                                                        <div>
+                                                            <h:selectOneMenu value="#{cotationController.article.pecae}">
+                                                                <f:selectItem itemValue="0" itemLabel="No" /> 
+                                                                <f:selectItem itemValue="1" itemLabel="Yes" />
+
+                                                            </h:selectOneMenu>                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </h:panelGroup>
+                                            <p:separator/>
+
+                                            <div class="row clearfix">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Montempt de facture</label>
+                                                    <div>
+                                                        <h:inputText autocomplete="false"  id="Montempt_de_facture" style="width: 90%;" value="#{cotationController.montempFacture}" >
+                                                            <p:ajax id="ajax1" event="keyup" listener="#{cotationController.valeurFOB}" update="namea,namey" />
+                                                        </h:inputText>  
+                                                    </div>
+
+
+                                                    <h:outputText rendered="false" style="color: white;" id="out" value="#{cotationController.montempFacture}" />
+
+                                                    <br/>
+
+                                                    <label class="form-label">Incoterm</label>
+                                                    <div>
+                                                        <h:selectOneMenu value="#{cotationController.incoterm}">
+                                                            <f:selectItem itemLabel="Select one" />                                                             
+                                                            <f:selectItem itemLabel="FOB" itemValue="FOB" />
+                                                            <f:selectItem itemLabel="CIF" itemValue="CIF"/>
+                                                            <f:selectItem itemLabel="CFR" itemValue="CFR" />
+                                                            <f:selectItem itemLabel="CIP" itemValue="CIP"/>
+                                                            <f:selectItem itemLabel="CPT" itemValue="CPT" />
+                                                            <f:selectItem itemLabel="DAF" itemValue="DAF"/>
+                                                            <f:selectItem itemLabel="DDP" itemValue="DDP" />
+                                                            <f:selectItem itemLabel="DDU" itemValue="DDU"/>
+                                                            <f:selectItem itemLabel="DEQ" itemValue="DEQ" />
+                                                            <f:selectItem itemLabel="DES" itemValue="DES"/>
+                                                            <f:selectItem itemLabel="EXW" itemValue="EXW" />
+                                                            <f:selectItem itemLabel="FAS" itemValue="FAS"/>
+                                                            <f:selectItem itemLabel="FCA" itemValue="FCA" />
+                                                            <p:ajax id="ajax3" listener="#{cotationController.valeurFOB}" update="namea,namey" />
+                                                        </h:selectOneMenu>  
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Valeur FOB</label>
+                                                    <div>
+                                                        <h:panelGroup id="namea">
+
+                                                            <h:inputText id="Valeur_FOB" style="width: 90%;" value="#{cotationController.valeurFOB}" >
+                                                                <p:ajax id="ajax2" event="keyup" listener="#{cotationController.valeurAssurance}" update="namey" />
+                                                            </h:inputText>
+
+                                                        </h:panelGroup>  
+                                                    </div>
+
+
+                                                    <br/>
+
+                                                    <label class="form-label">Montant assurance</label>
+                                                    <div>
+                                                        <h:panelGroup id="namey">
+
+                                                            <h:inputText id="Montant_assurance" style="width: 90%;" value="#{cotationController.assurance}" />
+
+                                                        </h:panelGroup>  
+                                                    </div>
+
+
+                                                </div>  
+                                            </div>
+                                            <p:separator/>
+
+
+                                            <div class="row clearfix">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Type de contenaire</label>
+                                                    <div>
+                                                        <h:selectOneMenu value="#{cotationController.cotation.conteneur}">
+                                                            <f:selectItem itemLabel="20" itemValue="20" />
+                                                            <f:selectItem itemLabel="40" itemValue="40"/>
+
+                                                        </h:selectOneMenu>  
+                                                    </div>
+
+
+                                                    <label class="form-label" style="margin-top: 13px;">Poids(Total kg)</label>
+                                                    <div>
+                                                        <h:inputText id="Poids_Total_kg" style="width: 90%;" value="#{cotationController.poids}" />  
+                                                    </div>
+
+                                                    <br/>
+
+                                                    <label class="form-label">Taux du droit d'accise</label>
+                                                    <div>
+                                                        <h:selectOneMenu value="#{cotationController.droitDaccise}">
+                                                            <f:selectItem itemLabel="12.5" itemValue="12.5"/>
+                                                            <f:selectItem itemLabel="25" itemValue="25"/>
+
+                                                        </h:selectOneMenu>   
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6">
+
+
+                                                    <label class="form-label" id="f">Montant du fret</label>
+                                                    <div>
+                                                        <h:inputText id="montant_du_fret" style="width: 90%;" value="#{cotationController.montantFret}" />  
+                                                    </div>
+
+
+                                                    <br/>
+
+                                                    <label class="form-label">Transport</label>
+                                                    <div>
+                                                        <h:inputText id="Transport" style="width: 90%;" value="#{cotationController.transport}" /> 
+                                                    </div>
+
+
+                                                    <br/>
+
+                                                    <label class="form-label">Taux du PRC</label>
+                                                    <div>
+                                                        <h:selectOneMenu value="#{cotationController.tauxPRC}">
+                                                            <f:selectItem itemLabel="0" itemValue="0" />
+                                                            <f:selectItem itemLabel="2" itemValue="2"/>
+
+                                                        </h:selectOneMenu>   
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+                                            <center>
+                                                <p:commandButton class="btn waves-effect" style="background-color: #1f897f; color: white;  padding-left: 22px; padding-right: 22px;" type="submit" value="CALCULATE" update=":form2:msg" action="#{cotationController.calculer()}" />
+                                                <!--<p:commandButton class="btn waves-effect" style="background-color: #ff3333; padding-left: 22px; padding-right: 22px; color: white;" type="submit" value="CLEAR" actionListener="" />-->
+                                            </center>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+
+                    </f:view>
+                </section>
+
+            </ui:define>
+
+        </ui:composition>
+
+
+
+    </body>
+</html>
+
+

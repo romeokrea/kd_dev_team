@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <application>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>fr</supported-locale>
+        </locale-config>
+    
+        <resource-bundle>
+            <base-name>controllers.language</base-name>
+            <var>lm</var>
+        </resource-bundle>
+    </application>
+    
+    <managed-bean>
+        <managed-bean-name>sessionController</managed-bean-name>
+        <managed-bean-class>controllers.sessionController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>userController</managed-bean-name>
+        <managed-bean-class>controllers.UserController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>acconierController</managed-bean-name>
+        <managed-bean-class>controllers.AcconierController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>transporteurController</managed-bean-name>
+        <managed-bean-class>controllers.TransporteurController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>cADController</managed-bean-name>
+        <managed-bean-class>controllers.CADController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>print</managed-bean-name>
+        <managed-bean-class>controllers.Print</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>articleController</managed-bean-name>
+        <managed-bean-class>controllers.ArticleController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>cotationController</managed-bean-name>
+        <managed-bean-class>controllers.CotationController</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope></managed-bean>
+        
+    <managed-bean>
+        <managed-bean-name>statistics</managed-bean-name>
+        <managed-bean-class>controllers.Statistics</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope></managed-bean>
+        
+        <managed-bean>
+        <managed-bean-name>contactsController</managed-bean-name>
+        <managed-bean-class>controllers.ContactsController</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope></managed-bean>
+    <managed-bean>
+        <managed-bean-name>banqueController</managed-bean-name>
+        <managed-bean-class>controllers.BanqueController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>assuranceController</managed-bean-name>
+        <managed-bean-class>controllers.AssuranceController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>assureurController</managed-bean-name>
+        <managed-bean-class>controllers.AssureurController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>modelledeclarationController</managed-bean-name>
+        <managed-bean-class>controllers.ModelledeclarationController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>codeadditionnelsController</managed-bean-name>
+        <managed-bean-class>controllers.CodeadditionnelsController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>regimedouanierController</managed-bean-name>
+        <managed-bean-class>controllers.RegimedouanierController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>paramcalculController</managed-bean-name>
+        <managed-bean-class>controllers.ParamcalculController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>paramsocieteController</managed-bean-name>
+        <managed-bean-class>controllers.ParamsocieteController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>paramlogicielController</managed-bean-name>
+        <managed-bean-class>controllers.ParamlogicielController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+</faces-config>

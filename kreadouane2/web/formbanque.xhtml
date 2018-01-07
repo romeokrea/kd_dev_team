@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                        template="./template.xhtml">
+
+            <ui:define name="container">
+                <section class="content" id="fm_user" modal="true" showEffect="fold" widgetVar="wv_user">
+                    
+                    <div><h4 style=" margin-top: 1px; margin-bottom: 15px;">Ajouter une banque</h4></div>
+                    <!--<div class="container-fluid">-->
+                    <f:view locale="#{sessionController.language}">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    
+                                    <div class="body">
+                                        <h:form id="form_validation">
+                                            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+                                            <div class="row clearfix">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Name of company:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{banqueController.operation.equals('delete')}" id="namecompany" value="#{banqueController.banque.namecompany}" required="true" requiredMessage="Obligatory field!"/>
+
+                                                    </div>
+                                                    <br/>  
+                                                    <br/>
+
+
+                                                    <label class="form-label">adress of company:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{banqueController.operation.equals('delete')}" id="adressecompany" value="#{banqueController.banque.adressecompany}" required="true" requiredMessage="Obligatory field!" />
+
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">taxe payer number:</label>
+                                                    <div>
+                                                        <p:inputMask class="form-control" 
+                                                                     disabled="#{banqueController.operation.equals('delete')}" id="phonecontribuable" value="#{banqueController.banque.phonecontribuable}" required="true" requiredMessage="Obligatory field!" mask="(+237) 699-999-999"/>
+
+                                                    </div>
+                                                    <br/>  
+                                                    <br/>
+
+                                                    <label class="form-label">email of company:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{banqueController.operation.equals('delete')}" id="emailcompany" value="#{banqueController.banque.emailcompany}" required="true" requiredMessage="Obligatory field!" />
+
+                                                    </div>
+                                                    <br/>
+
+                                                </div>
+                                            </div>
+
+
+                                            <!--                                <div class="form-group form-float">
+                                                                                <div class="form-line">
+                                                                                    <input type="text" class="form-control" name="name" />
+                                                                                    <label class="form-label">Name</label>
+                                                                                </div>
+                                                                            </div>-->
+                                            <!--                                <div class="form-group form-float">
+                                                                                <div class="form-line">
+                                                                                    <input type="text" class="form-control" name="surname" />
+                                                                                    <label class="form-label">Surname</label>
+                                                                                </div>
+                                                                            </div>-->
+                                            <!--                                            <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <input type="email" class="form-control" name="email" />
+                                                                                                <label class="form-label">Email</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <input type="radio" name="gender" id="male" class="with-gap"/>
+                                                                                            <label for="male">Male</label>
+                                            
+                                                                                            <input type="radio" name="gender" id="female" class="with-gap"/>
+                                                                                            <label for="female" class="m-l-20">Female</label>
+                                                                                        </div>
+                                                                                        <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <textarea name="description" cols="30" rows="5" class="form-control no-resize" ></textarea>
+                                                                                                <label class="form-label">Description</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <input type="password" class="form-control" name="password" />
+                                                                                                <label class="form-label">Password</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <input type="checkbox" id="checkbox" name="checkbox"/>
+                                                                                            <label for="checkbox">I have read and accept the terms</label>
+                                                                                        </div>-->
+                                            <!--                                            <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>-->
+                                            <center>
+                                                <p:commandButton class="btn waves-effect" style="background-color: #26a69a; color: white;" type="submit" action="#{banqueController.saveBanque()}" value="#{lm.Save}"/>
+                                            </center>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </f:view>
+                    <!--</div>-->
+                </section>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

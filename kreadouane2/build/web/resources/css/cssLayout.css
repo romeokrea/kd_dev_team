@@ -1,0 +1,269 @@
+
+#top {
+    height: auto;
+    width: 99%;
+    background-color: #fff;
+    color: #5a5252;
+}
+
+#bottom {
+    background-color: white;
+}
+
+#left {
+    float: left;
+    padding: 0.8%;
+}
+
+
+.left_content {
+    float: right;
+    width: 80%;
+}
+
+#left a:link, #top a:visited {
+    color: white;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+#left a:link:hover, #top a:visited:hover  {
+    color: green;
+    font-weight : bold;
+    text-decoration : underline;
+}
+.submenu{
+    background-color: #5d995d; 
+    height: 35px;
+}
+
+.english{
+    background-image: url( ../image/england.png) !important; 
+    height: 16px;
+    width: 27px;
+}
+.french{
+ background-image: url( ../image/fr.png) !important; 
+    height: 16px;
+    width: 27px;
+}
+
+#bottombar {
+    position: relative;
+    background-color: #248424;
+    padding: 5px;
+}
+#bcground {
+    background-color: darkseagreen;
+    padding: 20.5%;
+}
+.img-circle {
+    border-radius: 40%;
+    width: 50px;
+}
+.categories{
+    background-image: url('../image/categories.png') !important;
+    padding: 5px;
+}
+.flag{
+    background-image: url('../image/flag-yellow.png') !important;
+    padding: 5px;
+}
+.logout{
+    background-image: url('../image/lock.png') !important;
+    padding: 5px;
+    height: 25px;
+    width: 27px;
+}
+.home{
+    background-image: url('../image/home.png') !important;
+    padding: 5px;
+}
+.ui-datatable.borderless .ui-datatable-data tr,
+.ui-datatable.borderless .ui-datatable-data-empty tr,
+.ui-datatable.borderless .ui-datatable-data td,
+.ui-datatable.borderless .ui-datatable-data-empty td {
+    border-style: none;
+}
+.park{
+    background-image: url('../image/board-game.png') !important;
+    padding: 5px;
+}
+img.responsive-img, video.responsive-video {
+  max-width: 100%;
+  height: auto; }
+
+
+table, th, td, #comments .avatar, #comments input, #comments textarea {
+    border-color: #ffffff;
+}
+.ui-widget-content {
+    color: #262e24;
+}
+.ui-widget-header {
+    border: none;
+    background: #389038  -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    font-style: italic;
+    text-shadow: none;
+}
+.plus{
+    background-image: url('../../../resources/image/plus.png') !important;
+    padding: 5px;
+}
+.cross{
+    background-image: url('../../../resources/image/cross-script.png') !important;
+    padding: 5px;
+}
+.bg{
+    background-image: url('../../loginImages/demo/slides/forest-4.jpg') !important;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background: #dbebdb -moz-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0));
+    box-shadow: 0px 0px 8px #258926;
+}
+h1, h2, h3, h4, h5, h6, .heading {
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+#panel .ui-widget-content  {
+    border: 1px solid transparent;
+    background: transparent;
+    color: #4f4f4f;
+}
+paginator {
+    padding: 0px;
+}
+.ui-corner-all {
+    border-radius: 4px;
+}
+body {
+    font-size: 10.7px;
+}
+.ui-inputfield {
+    margin: 2px;
+    outline: medium none;
+    padding: 3px;
+    font-weight: normal;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #b9b0b0;
+        border-top-width: 1px;
+        border-right-width: 1px;
+        border-bottom-width: 1px;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+        border-top-color: rgb(185, 176, 176);
+        border-right-color: rgb(185, 176, 176);
+        border-bottom-color: rgb(185, 176, 176);
+    background: #c4c4c4 url("/saaswood2/faces/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png?ln=primefaces-aristo") 50% 50% repeat-x;
+    background: #c4c4c4 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
+    background:  #ddffdd -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF);
+    font-weight: bold;
+    color: #262e24;
+    text-shadow: 0px 1px 0px rgba(255,255,255,0.7);
+}
+#panel2 .ui-widget-content {
+    background: transparent;
+    color: black;
+    
+}
+#panel2 .ui-widget-content {
+    border: none;
+    border-color: transparent;
+}
+
+.sales{
+    background-image: url('../../../resources/image/card-address.png') !important;
+    padding: 0px;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
+    padding: 0px;
+}
+#panel3 .ui-widget-content {
+    border: none;
+    border-color: transparent;
+}
+.tree{
+    background-image: url('../image/tree.png') !important;
+    padding: 5px;
+}
+.agent{
+    background-image: url('../image/user-business.png') !important;
+    padding: 5px;
+}
+.text{
+    background-image: url('../image/blue-documents-text.png') !important;
+    padding: 5px;
+}
+.forest{
+    background-image: url('../image/board-game.png') !important;
+    padding: 5px;
+}
+.wl{
+    background-image: url('../image/ui-tooltip.png') !important;
+    padding: 5px;
+}
+.wdenl{
+    background-image: url('../image/wooden-box.png') !important;
+    padding: 5px;
+}
+.sal{
+    background-image: url('../image/hand-shake.png') !important;
+    padding: 5px;
+}
+.stat{
+    background-image: url('../image/barcode.png') !important;
+    padding: 5px;
+}
+.pos{
+    background-image: url('../image/blogs.png') !important;
+    padding: 5px;
+}
+.truck{
+    background-image: url('../image/truck--plus.png') !important;
+    padding: 5px;
+}
+.statPost{
+/*    background-image: url('../image/statPost.png') !important;
+    padding-left: 20px;
+    padding: 0px;*/
+    
+}
+.statTress{
+    background-image: url('../image/growth-cave-tree-logo-mockup-.jpg') !important;
+    padding: 0px;
+}
+.statSales{
+    background-image: url('../image/imageSales.png') !important;
+    padding: 0px;
+}
+.statForest{
+    background-image: url('../image/canva-photo-editor.png') !important;
+    
+}
+.ui-state-default {
+    background: #ddffdd4d -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+}
+.ui-datatable {
+    width: 100%;
+    table-layout: auto;
+}
+.tab .ui-widget-content {
+    border-bottom: 0.5px solid #c4c4c4;
+/*    color: #4f4f4f;*/
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+/*.ui-widget-header {
+    border: none;
+    background: #389038 -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    font-style: italic;
+    text-shadow: none;
+    height: 26px;
+}*/

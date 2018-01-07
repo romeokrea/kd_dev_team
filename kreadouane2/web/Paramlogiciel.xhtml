@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                        template="./template.xhtml">
+
+            <ui:define name="container">
+                <section class="content" id="fm_user" modal="true" showEffect="fold" widgetVar="wv_user">
+                    <!--<div class="container-fluid">-->
+                    <f:view locale="#{sessionController.language}">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>liste des parametres du logiciel</h2>
+                                    </div>
+                                    <div class="body">
+                                        <h:form id="form_validation">
+
+                                            <div class="row clearfix">
+                                                <div class="col-md-6">
+
+
+
+                                                    <label class="form-label">Lien:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{paramlogicielController.operation.equals('delete')}" required="true" requiredMessage="Obligatory field!" id="lien" value="#{paramlogicielController.paramlogiciel.lien}" title="valeur" />
+
+                                                    </div>
+                                                    <br/>
+
+                                                    <label class="form-label">Serveur:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{paramlogicielController.operation.equals('delete')}" id="serveur" value="#{paramlogicielController.paramlogiciel.serveur}" title="valeur" required="true" requiredMessage="Obligatory field!" />
+
+                                                    </div>
+                                                    <br/>
+                                                    <label class="form-label">Nom de la BD:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{paramlogicielController.operation.equals('delete')}" id="nombd" value="#{paramlogicielController.paramlogiciel.nombd}" title="valeur" required="true" requiredMessage="Obligatory field!" />
+
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">User:</label>
+                                                    <div>
+                                                        <p:inputText type="text"  class="form-control" 
+                                                                     disabled="#{paramlogicielController.operation.equals('delete')}" id="user" value="#{paramlogicielController.paramlogiciel.user}" title="valeur" required="true" requiredMessage="Obligatory field!" />
+
+                                                    </div>
+                                                    <br/>  
+
+
+                                                    <label class="form-label">Password:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{cADController.operation.equals('delete')}" id="password" value="#{paramlogicielController.paramlogiciel.password}" title="#{lm.Email}" required="true" requiredMessage="Obligatory field!"/>
+
+                                                    </div>
+                                                    <br/>
+                                                    <label class="form-label">Lien de sauvegarde:</label>
+                                                    <div>
+                                                        <p:inputText type="text" class="form-control" 
+                                                                     disabled="#{paramlogicielController.operation.equals('delete')}" id="liendesauvegarde" value="#{paramlogicielController.paramlogiciel.liendesauvegarde}" title="valeur" required="true" requiredMessage="Obligatory field!"/>
+
+                                                    </div>
+                                                    <br/> 
+
+                                                </div>
+                                            </div>
+
+
+                                            <!--                                <div class="form-group form-float">
+                                                                                <div class="form-line">
+                                                                                    <input type="text" class="form-control" name="name" />
+                                                                                    <label class="form-label">Name</label>
+                                                                                </div>
+                                                                            </div>-->
+                                            <!--                                <div class="form-group form-float">
+                                                                                <div class="form-line">
+                                                                                    <input type="text" class="form-control" name="surname" />
+                                                                                    <label class="form-label">Surname</label>
+                                                                                </div>
+                                                                            </div>-->
+                                            <!--                                            <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <input type="email" class="form-control" name="email" />
+                                                                                                <label class="form-label">Email</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <input type="radio" name="gender" id="male" class="with-gap"/>
+                                                                                            <label for="male">Male</label>
+                                            
+                                                                                            <input type="radio" name="gender" id="female" class="with-gap"/>
+                                                                                            <label for="female" class="m-l-20">Female</label>
+                                                                                        </div>
+                                                                                        <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <textarea name="description" cols="30" rows="5" class="form-control no-resize" ></textarea>
+                                                                                                <label class="form-label">Description</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <input type="password" class="form-control" name="password" />
+                                                                                                <label class="form-label">Password</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <input type="checkbox" id="checkbox" name="checkbox"/>
+                                                                                            <label for="checkbox">I have read and accept the terms</label>
+                                                                                        </div>-->
+                                            <!--                                            <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>-->
+                                            <center>
+                                                <p:commandButton class="btn waves-effect" style="background-color: #26a69a; color: white;" type="submit" actionListener="#{paramlogicielController.modifyParamlogiciel()}" value="#{lm.Save}"/>
+                                            </center>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </f:view>
+                    <!--</div>-->
+                </section>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>
+

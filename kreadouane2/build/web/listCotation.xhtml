@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="container">
+                <section class="content">
+                    <div><h4 style=" margin-top: 1px; margin-bottom: 15px;">Liste des cotations</h4></div>
+                    
+                    <f:view locale="#{sessionController.language}">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    <div class="body">
+                                        <h:form id="form">
+                                            <p:growl id="msg" showDetail="true" life="2000" /> 
+                                             <b style="margin-left: 780px;">Exporter en:</b>
+                                            <h:commandLink style="margin-bottom: 10px; margin-left: 20px;">
+
+                                           
+                                                <img src="resources/image/Excel-icon-smaller.png" alt=""/>
+                                                <p:dataExporter type="xls" target="table" fileName="article" postProcessor="#{print.postProcessXLS}" />
+                                            </h:commandLink>    
+                                            <h:commandLink>
+                                                <img src="resources/image/Oficina-PDF-icon-smaller.png" alt=""/>
+                                                <p:dataExporter type="pdf" target="table" fileName="article" preProcessor="#{print.preProcessPDF}" />
+                                            </h:commandLink>
+                                             <p:dataTable class="borderless" scrollable="true" scrollHeight="380" reflow="true" selectionMode="single" selection="#{cotationController.cotation}" rowKey="#{item.id}" id="table" value="#{cotationController.listCotation}" var="item">
+
+                                                <p:column filterBy="#{item.referance}">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Referance" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.referance}"/>
+                                                </p:column>
+                                                <p:column filterBy="#{item.artId.description}">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Article" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.artId.description}"/>
+                                                </p:column>
+                                                <p:column filterBy="#{item.datecreation}">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Date creation" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.datecreation}"/>
+                                                </p:column>
+                                                <p:column filterBy="#{item.montemp}">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Montemp" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.montemp}"/>
+                                                </p:column>
+                                                <p:column filterBy="#{item.type}">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Type" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.type}"/>
+                                                </p:column>
+                                                <p:column filterBy="#{item.utiId.name}#{item.utiId.surname}">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="creator" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.utiId.name} #{item.utiId.surname}"/>
+                                                </p:column>
+                                                <p:column filterBy="">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="option" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+
+
+                                                    <center>
+                                                        <p:commandButton icon="ui-icon-lightbulb" class="waves-effect" action="#{cotationController.consult()}" style=" background-color: #0066cc; margin-bottom: 5px; color: white;"/>
+                                           
+                                                       </center>
+                                                </p:column>
+
+                                            </p:dataTable>
+
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+
+                    </f:view>
+                </section>
+
+            </ui:define>
+
+        </ui:composition>
+
+
+
+    </body>
+</html>
+
+

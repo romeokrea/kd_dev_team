@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                        template="./template.xhtml">
+
+            <ui:define name="container">
+                <section class="content" id="fm_user" modal="true" showEffect="fold" widgetVar="wv_user">
+                     <div><h4 style=" margin-top: 1px; margin-bottom: 15px;">Liste des parametres de calcul</h4></div>
+                    <!--<div class="container-fluid">-->
+                    <f:view locale="#{sessionController.language}">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    
+                                    <div class="body">
+                                       <h:form id="form_validation">
+                                            
+                                            
+                                           <p:dataTable selectionMode="single" selection="#{paramcalculController.paramcalcul}" rowKey="#{item.id}" id="table" value="#{paramcalculController.listParamcalcul}" var="item" class="borderless" scrollable="true" scrollHeight="380" reflow="true">
+
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Caution" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.caution}"/>
+                                                </p:column>
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Commission debource" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.commissiondebource}"/>
+                                                </p:column>
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Commission transit" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.commissiontransit}"/>
+                                                </p:column>
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Controlle sanitaire" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.controlsanitaire}"/>
+                                                </p:column>
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Ouverture dossier" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.fraisouverturedossier}"/>
+                                                </p:column>
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Guce" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.guce}"/>
+                                                </p:column>
+                                               <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Impressionbl" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                   <h:outputText value="#{item.impressionbl}"/>
+                                                </p:column>
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="PAD" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.pad}"/>
+                                                </p:column>
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Phytosanitaire" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.phytosanitaire}"/>
+                                                </p:column>
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Scanning" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.scanning}"/>
+                                                </p:column>
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="timbrebl" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.timbrebl}"/>
+                                                </p:column>
+                                                <p:column  style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="travail extra legal" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.travailextralegal}"/>
+                                                </p:column>
+                                                <p:column filterBy="" style="background-color: transparent">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="option" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                                    </f:facet>
+
+
+                                                    <center>
+                                                        <p:commandButton icon="ui-icon-pencil" action="#{paramcalculController.modifParam()}" style=" background-color: #1f897f;"/>
+                                                         </center>
+                                                </p:column>
+
+                                            </p:dataTable>
+                                            
+
+                                           
+
+
+                                            <!--                                <div class="form-group form-float">
+                                                                                <div class="form-line">
+                                                                                    <input type="text" class="form-control" name="name" />
+                                                                                    <label class="form-label">Name</label>
+                                                                                </div>
+                                                                            </div>-->
+                                            <!--                                <div class="form-group form-float">
+                                                                                <div class="form-line">
+                                                                                    <input type="text" class="form-control" name="surname" />
+                                                                                    <label class="form-label">Surname</label>
+                                                                                </div>
+                                                                            </div>-->
+                                            <!--                                            <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <input type="email" class="form-control" name="email" />
+                                                                                                <label class="form-label">Email</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <input type="radio" name="gender" id="male" class="with-gap"/>
+                                                                                            <label for="male">Male</label>
+                                            
+                                                                                            <input type="radio" name="gender" id="female" class="with-gap"/>
+                                                                                            <label for="female" class="m-l-20">Female</label>
+                                                                                        </div>
+                                                                                        <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <textarea name="description" cols="30" rows="5" class="form-control no-resize" ></textarea>
+                                                                                                <label class="form-label">Description</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group form-float">
+                                                                                            <div class="form-line">
+                                                                                                <input type="password" class="form-control" name="password" />
+                                                                                                <label class="form-label">Password</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <input type="checkbox" id="checkbox" name="checkbox"/>
+                                                                                            <label for="checkbox">I have read and accept the terms</label>
+                                                                                        </div>-->
+                                            <!--                                            <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>-->
+                                      
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </f:view>
+                    <!--</div>-->
+                </section>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

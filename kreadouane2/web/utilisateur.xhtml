@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./welcom.xhtml">
+
+            <ui:define name="content">
+                <f:view locale="#{sessionController.language}">
+                    <h:form id="form">
+                        <p:growl id="msg" showDetail="true" life="30000" /> 
+                        <h1><h:outputText style="color: white" value="liste des utilisateur"/></h1>
+
+                        <h:panelGrid columns="6">
+                            <p:commandButton icon="ui-icon-plus" widgetVar="add" partialSubmit="true" actionListener="#{userController.prepareCreate}" update=":form_tr:fm_user,:form:msg" oncomplete="PF('wv_user').show()" value="#{lm.add}" style=" background-color: darkseagreen"/>
+                            <p:commandButton icon="ui-icon-pencil" widgetVar="modify" value="#{lm.edit}" partialSubmit="true" actionListener="#{userController.action}" update=":form_edit:fm_userEdit,:form:msg" oncomplete="PF('wv_userEdit').show()" style=" background-color: darkseagreen"/>
+                            <p:commandButton icon="ui-icon-trash" value="#{lm.delete}" widgetVar="delete"  oncomplete="PF('wv_delete').show()" style=" background-color: darkseagreen"/>
+                            <p:commandButton icon="ui-icon-refresh" update="table" actionListener="#{userController.init()}" value="#{lm.Refresh}" style=" background-color: darkseagreen"/>
+                            <h:commandLink>
+                                <img src="resources/image/Excel-icon-smaller.png" alt=""/>
+                                <p:dataExporter type="xls" target="table" fileName="utilisateur" postProcessor="#{print.postProcessXLS}" />
+                            </h:commandLink>    
+                            <h:commandLink>
+                                <img src="resources/image/Oficina-PDF-icon-smaller.png" alt=""/>
+                                <p:dataExporter type="pdf" target="table" fileName="utilisateur" preProcessor="#{print.preProcessPDF}" />
+                            </h:commandLink>
+                        </h:panelGrid>
+                        <p:dataTable selectionMode="single" selection="#{userController.account}" rowKey="#{item.id}" id="table" value="#{userController.listAccount}" var="item"  rows="4" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+                            <p:column filterBy="#{item.utiId.name}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="#{lm.Name}" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.utiId.name}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.utiId.surname}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="#{lm.Surname}" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.utiId.surname}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.utiId.phone}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="#{lm.Phone}" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.utiId.phone}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.utiId.email}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="#{lm.Email}" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.utiId.email}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.utiId.sexe}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="#{lm.Sexe}" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.utiId.sexe}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.utiId.matricule}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="#{lm.Matricule}" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.utiId.matricule}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.function}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="#{lm.Function}" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.function}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.login}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="#{lm.Login}" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.login}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.password}" style="background-color: transparent">
+                                <f:facet name="header">
+                                    <h:outputText value="#{lm.Password}" style="color: black; font-family: Arial;font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{item.password}"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </h:form>
+
+                    <h:form id="form_tr">
+                        <p:dialog id="fm_user" modal="true" showEffect="fold" widgetVar="wv_user">
+
+                            <f:facet name="header">
+                                <center>
+                                    <h:outputText value="#{lm.Addanagent}"/>
+                                </center>
+                            </f:facet>
+                            <h:panelGrid id="inputs" columns="4">
+
+                                <p:outputLabel value="#{lm.Name}:" for="name" />
+                                <p:inputText disabled="#{userController.operation.equals('delete')}" id="name" value="#{userController.utilisateur.name}" title="Name" required="true" requiredMessage="Obligatory field!" />
+                          
+
+                                <p:outputLabel value="#{lm.Surname}:" for="surName" />
+                                <p:inputText disabled="#{userController.operation.equals('delete')}" id="surName" value="#{userController.utilisateur.surname}" title="Surname" required="true" requiredMessage="Obligatory field!" />
+                              
+
+                                <p:outputLabel value="#{lm.Sexe}:" for="sex" />
+                                <p:selectOneMenu disabled="#{userController.operation.equals('delete')}" id="sex" value="#{userController.utilisateur.sexe}" required="true" requiredMessage="Obligatory field!" style="width:166px" effect="fold">
+                                    <f:selectItem itemLabel="Select one"/>
+                                    <f:selectItem itemLabel="Male" itemValue="Male" />
+                                    <f:selectItem itemLabel="#{lm.Female}" itemValue="Female"/>
+                                </p:selectOneMenu>
+                           
+
+                                <p:outputLabel value="#{lm.Function}:" for="function" />
+                                <p:selectOneMenu disabled="#{userController.operation.equals('delete')}" id="function" value="#{userController.account.function}" required="true" requiredMessage="Obligatory field!" style="width:166px" effect="fold">
+                                    <f:selectItem itemLabel="Select one"/>
+                                    <f:selectItem itemLabel="Administrator" itemValue="Administrator" />
+                                    <f:selectItem itemLabel="Manager" itemValue="Manager"/>
+                                    <f:selectItem itemLabel="User" itemValue="User"/>
+                                </p:selectOneMenu>
+                            
+
+                                <p:outputLabel value="#{lm.Phone}:" for="phone" />
+                                <p:inputMask disabled="#{userController.operation.equals('delete')}" required="true" requiredMessage="Obligatory field!" id="phone" value="#{userController.utilisateur.phone}" title="Organization" mask="(+237) 699-999-999" />
+                              
+
+                                <p:outputLabel value="#{lm.Email}:" for="email" />
+                                <p:inputText disabled="#{userController.operation.equals('delete')}" id="email" value="#{userController.utilisateur.email}" title="Email" required="true" requiredMessage="Obligatory field!"/>
+                          
+
+                                <p:outputLabel value="#{lm.Matricule}:" for="matricule" />
+                                <p:inputText disabled="#{userController.operation.equals('delete')}" id="matricule" value="#{userController.utilisateur.matricule}" title="matricule" required="true" requiredMessage="Obligatory field!"/>
+                              
+                                <p:outputLabel value="#{lm.Login}:" for="login" />
+                                <p:inputText disabled="#{userController.operation.equals('delete')}" id="login" value="#{userController.account.login}" title="Login" required="true" requiredMessage="Obligatory field!"/>
+                               
+
+                                <p:outputLabel value="#{lm.Password}:" for="password" />
+                                <p:password match="password2" disabled="#{userController.operation.equals('delete')}" id="password" value="#{userController.account.password}" title="Password" required="true" requiredMessage="Obligatory field!"/>
+                 
+
+                                <p:outputLabel value="Confirmation:" for="password2" />
+                                <p:password   disabled="#{userController.operation.equals('delete')}" id="password2" value="#{userController.account.password}" title="Password" required="true" requiredMessage="Obligatory field!"/>
+                             
+
+
+
+
+
+                            </h:panelGrid>
+                            <f:facet name="footer">
+                                <center>
+                                    <p:commandButton icon="ui-icon-check" actionListener="#{userController.saveUser()}" update="inputs,:form:table,:form:msg" value="#{lm.Save}" style=" background-color: darkseagreen"/>
+                                </center>
+                            </f:facet>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="form_edit">
+                        <p:dialog id="fm_userEdit" modal="true" showEffect="fold" widgetVar="wv_userEdit">
+
+                            <f:facet name="header">
+                                <center>
+                                    <h:outputText value="#{lm.Editanagent}"/>
+                                </center>
+                            </f:facet>
+                            <h:panelGrid id="inputs" columns="4">
+
+                                <p:outputLabel value="#{lm.Name}:" for="name" />
+                                <p:inputText disabled="#{userController.operation.equals('delete')}" id="name" value="#{userController.utilisateur.name}" title="Name" required="true" requiredMessage="Obligatory field!" />
+                             
+
+                                <p:outputLabel value="#{lm.Surname}:" for="surName" />
+                                <p:inputText disabled="#{userController.operation.equals('delete')}" id="surName" value="#{userController.utilisateur.surname}" title="Surname" required="true" requiredMessage="Obligatory field!" />
+                              
+
+                                <p:outputLabel value="#{lm.Sexe}:" for="sex" />
+                                <p:selectOneMenu disabled="#{userController.operation.equals('delete')}" id="sex" value="#{userController.utilisateur.sexe}" required="true" requiredMessage="Obligatory field!" style="width:166px" effect="fold">
+                                    <f:selectItem itemLabel="Select one"/>
+                                    <f:selectItem itemLabel="Male" itemValue="Male" />
+                                    <f:selectItem itemLabel="#{lm.Female}" itemValue="Female"/>
+                                </p:selectOneMenu>
+                            
+
+                                <p:outputLabel value="#{lm.Function}:" for="function" />
+                                <p:selectOneMenu disabled="#{userController.operation.equals('delete')}" id="function" value="#{userController.account.function}" required="true" requiredMessage="Obligatory field!" style="width:166px" effect="fold">
+                                    <f:selectItem itemLabel="Select one"/>
+                                    <f:selectItem itemLabel="Administrator" itemValue="Administrator" />
+                                    <f:selectItem itemLabel="Manager" itemValue="Manager"/>
+                                    <f:selectItem itemLabel="User" itemValue="User"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="#{lm.Phone}:" for="phone" />
+                                <p:inputMask disabled="#{userController.operation.equals('delete')}" required="true" requiredMessage="Obligatory field!" id="phone" value="#{userController.utilisateur.phone}" title="Organization" mask="(+237) 699-999-999" />
+                               
+
+                                <p:outputLabel value="#{lm.Email}:" for="email" />
+                                <p:inputText disabled="#{userController.operation.equals('delete')}" id="email" value="#{userController.utilisateur.email}" title="Email" required="true" requiredMessage="Obligatory field!"/>
+                            
+
+                                <p:outputLabel value="#{lm.Matricule}:" for="matricule" />
+                                <p:inputText disabled="#{userController.operation.equals('delete')}" id="matricule" value="#{userController.utilisateur.matricule}" title="matricule" required="true" requiredMessage="Obligatory field!"/>
+                           
+
+                                <p:outputLabel value="#{lm.Login}:" for="login" />
+                                <p:inputText disabled="#{userController.operation.equals('delete')}" id="login" value="#{userController.account.login}" title="Login" required="true" requiredMessage="Obligatory field!"/>
+                      
+
+                                <p:outputLabel value="#{lm.Password}:" for="password" />
+                                <p:password  match="password2" disabled="#{userController.operation.equals('delete')}" id="password" value="#{userController.account.password}" title="Password" required="true" requiredMessage="Obligatory field!"/>
+                         
+
+                                <p:outputLabel value="Confirmation:" for="password2" />
+                                <p:password   disabled="#{userController.operation.equals('delete')}" id="password2" value="#{userController.account.password}" title="Password" required="true" requiredMessage="Obligatory field!"/>
+                        
+
+
+
+                            </h:panelGrid>
+                            <f:facet name="footer">
+                                <center>
+                                    <p:commandButton icon="ui-icon-check" actionListener="#{userController.persist()}" update="inputs,:form:table,:form:msg" value="#{lm.Save}" style=" background-color: darkseagreen"/>
+                                </center>
+                            </f:facet>
+                        </p:dialog>
+                    </h:form>
+                    <h:form id="form_p">
+                        <p:dialog header="ERROR!" widgetVar="dlg2" modal="true" height="100">
+                            <h:outputText value="#{lm.thisagentalreadyexist}" />
+                        </p:dialog>   
+                    </h:form>
+                    <h:form>
+                        <p:dialog id="fm_delete" modal="true" showEffect="fold" widgetVar="wv_delete">
+
+                            <f:facet name="header">
+                                <h:outputText value="Choose an option" style="padding-left: 70px;"/>
+                            </f:facet>
+                            <h:panelGrid>
+                                <h:outputText value=" Do you really want to delete? "/>
+                            </h:panelGrid>
+                            <center>
+                                <div style="float: left; padding-left: 35px; padding-top: 10px;">
+                                    <p:commandButton immediate="true" update=":form_edit:fm_userEdit,:form:msg,:form:table" action="#{userController.deleteUser()}" icon="plus" value="Yes" style=" background-color: #6d9f6c; border-radius:20px; padding-left: 15px; padding-right: 15px;"/>
+                                </div>
+                                <div style="float: right; padding-right: 35px; padding-top: 10px;">
+                                    <p:commandButton oncomplete="PF('wv_delete').hide()" icon="cross" value="Cancel" style=" background-color: #6d9f6c; border-radius:20px;"/>
+                                </div>
+
+                            </center>
+                        </p:dialog>
+                    </h:form>
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+
